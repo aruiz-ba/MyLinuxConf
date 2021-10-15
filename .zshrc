@@ -19,7 +19,7 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots)		# Include hidden files.
+#_comp_options+=(globdots)		# Include hidden files.
 
 # vi mode
 bindkey -v
@@ -63,15 +63,36 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
+
+open () {xdg-open "$(find -type f | fzf)"}
+music () {mpv "$(find ~/Music/ -type f | fzf --keep-right)"}
+42 () {cd "$(find ~/Projects/42/ -type d | fzf)"}
+geserisk () {cd "$(find ~/Projects/geserisk/ -type d | fzf)"}
+fcd () {cd "$(find -type d | fzf)"}
+
 bindkey -s '^o' 'lfcd\n'
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+#MAIN aliases
+alias mv='mv -i'
+alias rm='rm -i'
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+alias record-screen='sh ~/.script/record-desktop.sh'
+alias webcam='mpv av://v4l2:/dev/video0'
+alias invert_color='xcalib -invert -alter'
+alias revert_color='xcalib -clear'
+#alias open='xdg-open "$(find -type f | fzf)"'
+
+alias cdwm='cd ~/Programs/my_git/my_dwm/ && vim config.h'
+alias drive='ranger /run/media/adri'
+alias search='surf duckduckgo.com'
+
+#geserisk aliases
+alias connect_domecq='ssh domecq@domecq.academy -p 2230'
+alias mount_disk_a='sudo mount /dev/sda4 /mnt/'
 
 # Load zsh-syntax-highlighting; should be last.
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
