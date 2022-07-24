@@ -19,9 +19,9 @@ PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magent
 ################################
 # History in cache directory:
 ################################
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.cache/zsh/history
 
 ################################
 # Basic auto/tab complete:
@@ -87,7 +87,7 @@ bindkey -s '^o' 'lfcd\n'
 #####################################################
 # Use ctrl-p to fzf on proyects
 #####################################################
-open_proyects () {cd "$(find ~/Projects -type d | fzf)"}
+open_proyects () {cd "$(find ~/ -type d | fzf)"}
 bindkey -s '^p' 'open_proyects\n'
 
 ###########################
@@ -95,7 +95,6 @@ bindkey -s '^p' 'open_proyects\n'
 ###########################
 open () {xdg-open "$(find -type f | fzf)"}
 music () {mpv "$(find ~/Media/Music/ -type f | fzf --keep-right)"}
-geserisk () {cd "$(find ~/Projects/geserisk/ -type d | fzf)"}
 fcd () {cd "$(find -type d -not -path '*/\.*' | fzf)"}
 
 ####################################
