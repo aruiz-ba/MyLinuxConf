@@ -18,6 +18,31 @@ setxkbmap en &
 # keyboard rate
 xset r rate 180 40
 
+#if theres external screen
+if [ $(xrandr -q | grep "VGA1 connected" | wc -l) != 0 ] ; then
+	xrandr --output VGA1 --auto --above LVDS1
+fi
+if [ $(xrandr -q | grep "HDMI1 connected" | wc -l) != 0 ] ; then
+	#xrandr --output HDMI1 --auto --above LVDS1
+	xrandr --output HDMI1 --auto
+	xrandr --output LVDS1 --off
+fi
+if [ $(xrandr -q | grep "HDMI2 connected" | wc -l) != 0 ] ; then
+	xrandr --output HDMI2 --auto
+	xrandr --output LVDS1 --off
+fi
+#intern=LVDS1
+#extern=VGA1
+
+#if xrandr | grep "$extern disconnected"; then
+#    xrandr --output "$extern" --off --output "$intern" --auto
+#else
+#    xrandr --output "$intern" --off --output "$extern" --auto
+#fi
+
+#setup dockd
+dockd --daemon &
+
 # Wallpaper
 nitrogen --restore & 
 #wal -i ~/.Backgrounds/Pictures_Wallpapers_ultraviolet4k.jpg
@@ -30,7 +55,7 @@ picom -f &
 redshift -t 6500:3000 -l 40.416775:-3.703790 &
 
 # Statusbar
-/home/$USER/Programs/my_git/my_dwm/dwm-bar/dwm_bar.sh &
+/home/$USER/my_git/my_dwm/dwm-bar/dwm_bar.sh &
 
 # automount external drives
 udiskie &
