@@ -38,9 +38,10 @@ static const Rule rules[] = {
 	{ "Gimp",    NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Firefox", NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ NULL,      NULL,     "Event Tester",  0,         0,          0,           1,        -1 }, /* xev */
 	{ NULL,      NULL,     "fract", 	       0,         0,          0,           1,        -1 },
-	{ NULL,      NULL,     "tk", 	       0,         0,          0,           1,        -1 },
+	{ NULL,      NULL,     "roop",           0,         0,          0,           1,        -1 },
+	{ NULL,      NULL,     "tk", 	          0,         0,          0,           1,        -1 },
 };
 
 /* layout(s) */
@@ -84,7 +85,7 @@ static Key keys[] = {
 	{ MODKEY, 						XK_y,	   spawn,		   SHCMD("kitty ytfzf -t") },
 	{ MODKEY|ShiftMask, 			XK_y,	   spawn,		   SHCMD("kitty ytfzf -m") },
 	{ MODKEY,                       XK_space,  spawn,		   SHCMD("keyboard_switch") },
-	{ MODKEY,                       XK_c, 	   spawn,		   SHCMD("st -e calcurse &; st -e vim /home/adri/Documents/Recordatorios/") },
+	{ MODKEY,                       XK_c, 	   spawn,		   SHCMD("st -e calcurse") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
