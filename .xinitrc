@@ -16,20 +16,17 @@ xmodmap -e 'keycode 0x42=Escape' #remaps the keyboard so CAPS LOCK=ESC
 setxkbmap en &
 
 # keyboard rate
-xset r rate 180 40
+xset r rate 170 55
 
 #if theres external screen
-if [ $(xrandr -q | grep "VGA1 connected" | wc -l) != 0 ] ; then
-	xrandr --output VGA1 --auto --above LVDS1
+if [ $(xrandr -q | grep "DP2-2 connected" | wc -l) != 0 ] ; then
+	xrandr --output DP2-2 --auto --above eDP1
+  xrandr --output eDP1 --off
 fi
-if [ $(xrandr -q | grep "HDMI1 connected" | wc -l) != 0 ] ; then
-	#xrandr --output HDMI1 --auto --above LVDS1
-	xrandr --output HDMI1 --auto
-	xrandr --output LVDS1 --off
-fi
-if [ $(xrandr -q | grep "HDMI2 connected" | wc -l) != 0 ] ; then
-	xrandr --output HDMI2 --auto
-	xrandr --output LVDS1 --off
+
+if [ $(xrandr -q | grep "DP2 connected" | wc -l) != 0 ] ; then
+	xrandr --output DP2 --rotate left --auto --above eDP1
+  xrandr --output eDP1 --off
 fi
 #intern=LVDS1
 #extern=VGA1
@@ -40,8 +37,6 @@ fi
 #    xrandr --output "$intern" --off --output "$extern" --auto
 #fi
 
-#setup dockd
-dockd --daemon &
 
 # Wallpaper
 nitrogen --restore & 
@@ -55,10 +50,13 @@ picom -f &
 redshift -t 6500:3000 -l 40.416775:-3.703790 &
 
 # Statusbar
-/home/$USER/my_git/my_dwm/dwm-bar/dwm_bar.sh &
+/usr/local/bin/dwm-bar/dwm_bar.sh &
 
 # automount external drives
 udiskie &
+
+#setup dockd
+dockd --daemon &
 
 # Execute DWM
 #exec --no-startup-id dunst
